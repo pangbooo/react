@@ -33,11 +33,18 @@ class CommentApp extends Component{
     _saveComments(comments){
         localStorage.setItem('comments',JSON.stringify(comments));
     }
+    handleDeleteComment(index){
+        console.log(index);
+        const comments = this.state.comments;
+        comments.splice(index,1);
+        this.setState({comments})
+        this._saveComments(comments)
+    }
     render(){
         return(
             <div class="wrapper">
                 <CommentInput onSubmit={this.handleSubmitComment.bind(this)}/>
-                <CommentList comments={this.state.comments}/>
+                <CommentList comments={this.state.comments} onDeleteComment={this.handleDeleteComment.bind(this)}/>
             </div>
         )
     }
