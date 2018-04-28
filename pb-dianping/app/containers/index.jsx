@@ -32,7 +32,6 @@ class App extends React.Component {
             cityName = '北京'
         }
         //将城市信息存到Redux中
-        console.log(cityName);
         this.props.userinfoActions.update({
             cityName
         })
@@ -42,12 +41,11 @@ class App extends React.Component {
         })
     }
 }
-const mapStateToProps = (state)=>{
-    return{
-
-    }
+function mapStateToProps(state){
+    return{}
 }
-const mapDispatchToProps = (dispatch) =>{
+
+function mapDispatchToProps(dispatch){
     return {
         userinfoActions : bindActionCreators(userinfoActionsFormOtherFile,dispatch)
     }
