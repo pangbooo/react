@@ -1,8 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { getListData } from '../../../fetch/home/home'
 import ListComponent from '../../../components/List'
 import LoadMore from '../../../components/LoadMore'
+import { getListData } from '../../../fetch/search/search'
+
 import './style.less'
 
 const initialState = {
@@ -12,7 +14,7 @@ const initialState = {
 	page : 1 //下一页页码
 }
 
-class List extends React.Component {
+class SearchList extends React.Component {
 	constructor(props, context){
 		super(props, context);
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -58,8 +60,10 @@ class List extends React.Component {
 	}
 
 	loadFirstPageData(){
-		const cityName = this.props.cityName
-		const result = getListData(cityName,0);
+		const cityName = this.props.userinfo.cityName
+		const category = this.props.category
+		const keyword = this.props.keyword
+		const result = getListData(0,cityName,category,keyword);
 		this.resultHandle(result)
 	}
 	//加载更多数据
@@ -67,9 +71,11 @@ class List extends React.Component {
 		this.setState({
 			isLoadingMore : true
 		})
-		const cityName = this.props.cityName;
+		const cityName = this.props.userinfo.cityName;
 		const page = this.state.page;
-		const result = getListData(cityName,page);
+		const category = this.props.category
+		const keyword = this.props.keyword
+		const result = getListData(page,cityName,category,keyword);
 		this.resultHandle(result);
 		this.setState({
 			isLoadingMore : false,
@@ -90,5 +96,17 @@ class List extends React.Component {
     	})
     }
 }
+function mapStateTpProps(state) {
+	return {
+		userinfo : state.userinfo
+	}
+}
+function mapDispatchToProps(dispatch) {
+    return {
+    }
+}
 
-export default List
+export default connect(
+	mapStateTpProps,
+	mapDispatchToProps
+)(SearchList)
