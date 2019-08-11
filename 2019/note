@@ -1,0 +1,83 @@
+0.npm_scripts
+    http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html
+
+1.webpack
+
+    入门 Webpack，看这篇就够了
+    https://segmentfault.com/a/1190000006178770
+
+    (入门)使用webpack 4.x定制自己的react开发环境
+    https://juejin.im/post/5ac9d052f265da237314b92c
+
+2.babel
+    https://juejin.im/post/59ec657ef265da431b6c5b03
+
+    1.babel各个模块介绍
+        1）babel-core
+        babel的核心api都在这个模块里面 ， transtorm...
+        2）babel-register 
+        引入babel-register之后所有require并以.es6, .es, .jsx 和 .js为后缀的模块都会经过babel的转译。
+
+        3）babel-polyfill
+        polyfill在代码中的作用主要是用已经存在的语法和api实现一些浏览器还没有实现的ap，对浏览器的一些缺陷做一些修补
+
+    2.babelrc （babel run command）
+    babel所有的操作基本都会来读取这个配置文件，除了一些在回调函数中设置options参数的，如果没有这个配置文件，会从package.json文件的babel属性中读取配置。
+
+        1）plugins
+        {
+            "plugins": [
+                "transform-es2015-arrow-functions", //转译箭头函数
+                "transform-es2015-classes", //转译class语法
+                "transform-es2015-spread", //转译数组解构
+                "transform-es2015-for-of" //转译for-of
+            ]
+        }
+
+        问题：
+            通过transform添加的polyfill只会引入到当前模块中
+            每个模块都引入相同的polyfill，大量重复的代码出现在项目中
+
+        解决：
+
+        2）transform-runtime
+        transform-runtime 依赖于 babel-runtime, 按需引入。
+
+        babel-runtime
+            core-js (过ES3实现了大部分的ES5、6、7的垫片)
+            regenerator (regenerator来自facebook的一个库，用于实现 generator functions。)
+            helpers (babel的一些工具函数)
+
+        使用transfrom-runtime -> {
+                                    "plugins": [
+                                        ["transform-runtime", {
+                                            "helpers": false, //自动引入helpers
+                                            "polyfill": false, //自动引入polyfill（core-js提供的polyfill）
+                                            "regenerator": true, //自动引入regenerator
+                                        }]
+                                    ]
+                                }
+        
+        3）presets（预设）
+        预设就是一系列插件的集合，就好像修图一样，把上次修图的一些参数保存为一个预设，下次就能直接使用
+
+        {
+            "presets: ["env",{
+                //...
+                //是否自动引入polyfill，开启此选项必须保证已经安装了babel-polyfill
+                //参数：Boolean，默认为false.
+                "useBuiltIns": false 
+            }]
+        }
+
+
+
+        
+
+
+
+
+
+
+
+

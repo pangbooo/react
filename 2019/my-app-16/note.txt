@@ -1,0 +1,13 @@
+origin:
+    核心概念
+        1）state & 生命周期 
+            .可以像class添加不参加数据流的格外字段（this.timeId...）
+            .state是异步的
+                // Correct
+                this.setState((state, props) => ({
+                    counter: state.counter + props.increment
+                }));
+            .数据向下流动（state 只会影响下面的组件）
+        
+        2）事件处理
+        
