@@ -29,7 +29,8 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'dist')));
 
 
-app.get('*',function(req, res){
+app.get('/*',function(req, res){
+    console.log('req.url.....', req.url);
     const context = {};
     const store = createStore(reducer);
 
@@ -44,6 +45,7 @@ app.get('*',function(req, res){
     let str = renderToString(jsx);
     const state = store.getState();
 
+    console.log('context', context)
     if (context.url) {
         res.writeHead(301, {
             Location: context.url
