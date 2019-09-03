@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, NavLink, Switch } from 'react-router-dom';
 function Header() {
     return (
       <ul>
@@ -22,6 +22,10 @@ function Header() {
   function About() {
     return <h2>About</h2>;
   }
+
+  function NoMatch(){
+      return <h2>NoMatch</h2>
+  }
   
   function Topic({match}) {
     console.log('Topic match', match)
@@ -39,7 +43,7 @@ function Header() {
             <Link to={`${match.url}/components`}>Components</Link> 
          </li>
          <li>
-             <Link to={`${match.url}/props-v-state`}>Props v. State</Link>  
+             <NavLink to={`${match.url}/props-v-state`} activeClassName="active">Props v. State</NavLink>  
          </li>
       </ul>
 
@@ -55,10 +59,17 @@ function AppRouter(){
         <Router>
             <div>
                 <Header />
-
-                <Route path='/' component={Index} exact></Route>
-                <Route path='/about' component={About}></Route>
-                <Route path='/topics' component={Topics}></Route>
+                {/*
+                    Switch: 用于包裹Route， 只渲染匹配到的第一个Route
+                            常用于404组件
+                */}
+                <Switch>
+                    <Route path='/' component={Index} exact></Route>
+                    <Route path='/about' component={About}></Route>
+                    <Route path='/topics' component={Topics}></Route>
+                    {/* when none of the above match, <NoMatch> will be rendered */}
+                    <Route component={NoMatch}></Route>
+                </Switch>
             </div>
 
             
