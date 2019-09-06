@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Link, NavLink, Switch } from "react-router-dom";
+import {  RedirectWithStatus } from '../utils.js';
 
 import Home from './components/Home';
 import About from './components/About';
@@ -19,6 +20,10 @@ const App = () =>{
           <Route path="/about" component={About} />
           <Route path="/users" component={Users} />
           <Route component={NotFound} />
+
+          <RedirectWithStatus status={301} from="/" to="/about" />
+          <RedirectWithStatus status={302} from="/about" to="/users" />
+
         </Switch>
     </div>
   )

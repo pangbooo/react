@@ -30,7 +30,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 
 app.get('/*',function(req, res){
-    console.log('req.url.....', req.url);
     const context = {};
     const store = createStore(reducer);
 
@@ -53,6 +52,10 @@ app.get('/*',function(req, res){
           res.end();
       } else {
         res.render('index', { root: str, state });
+      }
+
+      if (context.status === 404) {
+        res.status(404);
       }
 
 });
