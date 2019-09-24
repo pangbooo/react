@@ -62,7 +62,7 @@ const App = () => {
 </NavLink>
 // <a href='/react' className='hurray'>React</a>
 ```
-## Server Rendering
+## Server Rendering (uncompleted)
 ### 1. ` <StaticRouter>`
 > 在服务器上呈现有点不同，因为它都是无状态的。 基本思想是我们将应用程序包装在无状态<StaticRouter>而不是<BrowserRouter>中。 我们从服务器传入请求的URL，以便路由可以匹配，然后我们将讨论上下文支持。
 ``` javascript
@@ -83,3 +83,6 @@ if (context.url) {
 
 ```
 https://alligator.io/react/react-router-ssr/
+
+## Code Splitting
+### 1.
