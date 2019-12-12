@@ -1,0 +1,48 @@
+{
+  "name": "react_ssr_1",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node src/server.js",
+    "build": "rimraf dist && npm run build:client && npm run build:server",
+    "build:client": "webpack --config config/webpack.config.client.js",
+    "build:server": "webpack --config config/webpack.config.server.js"
+  },
+  "author": "pangbo",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "@loadable/babel-plugin": "^5.11.0",
+    "autoprefixer": "^9.7.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-dynamic-import-node": "^2.3.0",
+    "css-loader": "^3.3.0",
+    "eslint": "^6.7.2",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-react": "^7.17.0",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-loader": "^3.0.0",
+    "rimraf": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.1",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
