@@ -57,7 +57,7 @@ const baseWebpackConfig = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': require('./' + env + '.env')
+            'process.env': require('./' + env + '.env'),
         })
     ]
 }
