@@ -3,12 +3,23 @@ const fs = require('fs');
 const path = require('path');
 const ReactDOMServer = require('react-dom/server')
 const app = express();
+const isProd = process.env.NODE_ENV === 'production';
+let serverEntry;
+let template;
 
-let serverEntry = require('../dist/entry-server');
-let template = fs.readFileSync('./dist/index.html', 'utf-8');
-
-app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use("/public", express.static(path.join(__dirname, "../public")));
+
+if(isProd){
+    let serverEntry = require('../dist/entry-server');
+    let template = fs.readFileSync('./dist/index.html', 'utf-8');
+    
+    app.use('/dist', express.static(path.join(__dirname, '../dist')));
+}else {
+    require("./setup-dev-server")(app, (entry, htmlTemplate) => {
+        serverEntry = entry;
+        template = htmlTemplate
+    })
+}
 
 const render = (req, res) => {
     console.log('==== enter server ======')
