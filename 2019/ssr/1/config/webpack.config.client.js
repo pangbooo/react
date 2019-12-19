@@ -2,6 +2,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const LoadablePlugin = require("@loadable/webpack-plugin");
 const baseWebpackConfig = require('./webpack.config.base');
 const util = require('./util');
 const isProd = process.env.NODE_ENV === 'production';
@@ -27,10 +28,14 @@ const webpackConfig = merge(baseWebpackConfig, {
     },
     plugins: [
         // new HtmlWebpackPlugin() 默认生成 dist/index.html
-        new HtmlWebpackPlugin({ 
-            filename: "index.html",
-            template: path.resolve(__dirname,"../index.html")
-          })
+        // new HtmlWebpackPlugin({ 
+        //     filename: "index.html",
+        //     template: path.resolve(__dirname,"../index.html")
+        //   })
+
+        // generates a file called loadable-stats.json, 
+        //which contains information about all your entries and chuncks from webpack.
+        new LoadablePlugin()
     ]
 });
 

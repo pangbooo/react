@@ -5,13 +5,13 @@ const clientConfig = require('../config/webpack.config.client');
 const serverConfig = require('../config/webpack.config.server');
 
 module.exports = function setupDevServer(app, callback) {
-    let serverEntry;
-    let template;
+    let bundle;
+    let loadableStats;
     let resolve;
     const readyPromise = new Promise(r => resolve = r);
     const update  = () => {
-        if(serverEntry && template) {
-            callback(serverEntry, template);
+        if(bundle && loadableStats) {
+            callback(bundle, loadableStats);
             resolve();
         }
     }
@@ -41,15 +41,15 @@ module.exports = function setupDevServer(app, callback) {
     clientCompiler.hooks.done.tap("done", stats => {
         const info = stats.toJson();
         if (stats.hasWarnings()) {
-            console.warn(info.warnings);
+            console.warn('clientCompiler hasWarnings',info.warnings);
         }
 
         if (stats.hasErrors()) {
-            console.error(info.errors);
+            console.error('clientCompiler hasErrors', info.errors);
             return;
         }
-        // 从webpack-dev-middleware中间件存储的内存中读取打包后的index.html文件模板
-        template = readFile(devMiddleware.fileSystem, "index.html");
+        // 从webpack-dev-middleware中间件存储的内存中读取打包后的
+        loadableStats = readFile(devMiddleware.fileSystem, "loadable-stats.json");
         update();
     });
 
@@ -64,18 +64,14 @@ module.exports = function setupDevServer(app, callback) {
     serverCompiler.watch({},(err, stats)=> {
         const info = stats.toJson();
         if(stats.hasWarnings()){
-            console.log(info.warnings);
+            console.log('serverCompiler hasWarnings',info.warnings);
         }
         if(stats.hasErrors()){
-            console.log(stats.errors);
+            console.log('serverCompiler hasErrors',stats.errors);
             return;
         }
 
-        //读取打包后的内容 && 编译模块
-        const bundle = readFile(mfs, 'entry-server.js');
-        const m = new module.constructor();
-        m._compile(bundle, 'entry-server.js');
-        serverEntry = m.exports;
+        bundle = JSON.parse(readFile(mfs, "server-bundle.json"))
         update();
 
     });

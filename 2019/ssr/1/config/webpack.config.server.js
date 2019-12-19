@@ -4,6 +4,7 @@ const merge = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const baseWebpackConfig = require("./webpack.config.base");
 const nodeExternals = require("webpack-node-externals");
+const SSRServerPlugin = require("../plugin/webpack/server-plugin");
 const babelConfig = require("../.babelrc");
 const util = require("./util");
 
@@ -40,6 +41,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         // 服务端不支持window document等对象，需将css外链
         new MiniCssExtractPlugin({
             filename: "static/css/[name].[contenthash].css"
+        }),
+        new SSRServerPlugin({
+            filename: "server-bundle.json"
         })
     ]
 
