@@ -72,3 +72,15 @@ https://juejin.im/post/5ae9ae5e518825672f19b094
 - __@babel/preset-react__ ：即 babel-preset-react，针对所有 React 插件的 Babel 预设，例如将 JSX 转换为函数
 
 > **注：babel 7 使用了 @babel 命名空间来区分官方包，因此以前的官方包 babel-xxx 改成了 @babel/xxx
+
+## 开发环境热更新
+客户端-使用webpack-dev-middleware和webpack-hot-middleware这两个中间件。 
+
+### webpack-dev-middleware
+webpack-dev-middleware中间件不会把打包后的资源写入磁盘而是在内存中处理，当文件内容变动时会进行重新编译.
+https://www.npmjs.com/package/webpack-dev-middleware
+
+
+### webpack-hot-middleware
+该模块仅涉及将浏览器客户端连接到Webpack服务器并接收更新的机制。 它将订阅来自服务器的更改，并使用webpack的HMR API执行这些更改。 实际上，使您的应用程序能够使用热重载进行无缝更改超出了范围，并且通常由另一个库处理。（HotModuleReplacementPlugin）
+https://github.com/webpack-contrib/webpack-hot-middleware

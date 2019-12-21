@@ -3,16 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "start": "cross-env NODE_ENV=production node src/server.js",
     "build": "rimraf dist && npm run build:client && npm run build:server",
-    "build:client": "webpack --config config/webpack.config.client.js",
-    "build:server": "webpack --config config/webpack.config.server.js"
+    "build:client": "cross-env NODE_ENV=production webpack --config config/webpack.config.client.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config config/webpack.config.server.js"
   },
   "author": "pangbo",
   "dependencies": {
-    "express": "^4.17.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
@@ -27,6 +26,7 @@
     "eslint": "^6.7.2",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-react": "^7.17.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
     "less-loader": "^5.0.0",
@@ -34,6 +34,8 @@
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-loader": "^3.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.1",
@@ -42,6 +44,8 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"
   }
