@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Root from "./App";
+import App from "./App";
 
-ReactDOM.hydrate(<Root />, document.getElementById("app"));
+ReactDOM.hydrate(<App />, document.getElementById("app"));
 
 // 热更新
 if (module.hot) {
