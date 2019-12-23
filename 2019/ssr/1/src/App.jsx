@@ -1,18 +1,10 @@
 import React from "react";
-import {BrowerRouter as Router, Route, Switch,Redirect, NavLink} from 'react-router-dom'
+import {BrowserRouter as Router, 
+        Switch,
+        Redirect, 
+        NavLink} from 'react-router-dom'
 import {router, NestedRoute} from './router';
 import "./assets/app.css";
-let App;
-
-if(process.env.REACT_ENV == 'server'){
-    App = Root;
-}else{
-    App = () => {
-        <Router>
-            <Root />
-        </Router>
-    }
-}
 
 class Root extends React.Component {
     render() {
@@ -21,9 +13,10 @@ class Root extends React.Component {
                     <div className='title'>This is a react ssr demo</div>
                     <ul className='nav'>
                         <li><NavLink to='/bar'>Bar</NavLink></li>
-                        <li><NavLink to='/baz'></NavLink></li>
+                        <li><NavLink to='/baz'>Baz</NavLink></li>
                         <li><NavLink to='/foo'>Foo</NavLink></li>
                         <li><NavLink to='/top-list'>TopList</NavLink></li>
+                        <li><NavLink to='/parent'>Parent</NavLink></li>
                     </ul>
 
                     <div className='view'>
@@ -33,7 +26,7 @@ class Root extends React.Component {
                                     <NestedRoute key={i} {...route}/>
                                 ))
                             }
-                            <Redirect from='/' to='bar' />
+                            <Redirect from='/' to='bar' exact/>
                         </Switch>
                     </div>
                 </div>
@@ -42,6 +35,19 @@ class Root extends React.Component {
     }
 }
 
+let App;
+if(process.env.REACT_ENV == 'server'){
+    App = Root;
+}else{
+    App = () => {
+        return (
+            <Router>
+                <Root />
+            </Router>
+        )
+        
+    }
+}
 
 
 export default App;

@@ -4,7 +4,7 @@ class Child extends React.Component {
     render(){
         return (
             <div>
-              <div>Child</div>
+              Child...
             </div>
           );
     }

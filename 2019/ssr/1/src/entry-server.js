@@ -5,7 +5,7 @@ import Root from "./App";
 const createApp = (context, url) => {
     const App = () => {
         return (
-            <StaticRouter context={context} url={url}>
+            <StaticRouter context={context} location={url}>
                 <Root />
             </StaticRouter>
         )

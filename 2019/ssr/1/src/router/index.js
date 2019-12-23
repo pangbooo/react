@@ -3,8 +3,8 @@ import Bar from "../views/Bar";
 import Baz from "../views/Baz";
 import Foo from "../views/Foo";
 import TopList from "../views/TopList";
-// import Parent from "../views/Parent";
-// import Child from "../views/Child";
+import Parent from "../views/Parent";
+import Child from "../views/Child";
 
 const router = [
     {
@@ -23,6 +23,16 @@ const router = [
         path: '/top-list',
         component: TopList,
         exact: true
+    },
+    {
+        path:'/parent',
+        component: Parent,
+        routes: [
+            {
+                path: '/child',
+                component: Child
+            }
+        ]
     }
 ];
 
