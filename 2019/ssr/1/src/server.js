@@ -25,14 +25,27 @@ if(isProd){
 }
 
 const render = (req, res) => {
-    console.log('==== enter server ======')
+    console.log('--------------------- enter server----------------------')
     console.log('visit url', req.url);
 
     let context = {};
     let component = createApp(context,  req.url);
     let html = ReactDOMServer.renderToString(component);
-    let htmlStr = template.replace('<!--react-ssr-outlet-->', `<div id='app'>${html}</div>`);
-    res.send(htmlStr);
+    console.log('context', context);
+
+    if(context.url){ // 当发生重定向时，静态路由会设置url
+        res.redirect(context.url);
+        return 
+    }
+
+    if( !context.status ){ // 无status字段表示路由匹配成功
+        let htmlStr = template.replace('<!--react-ssr-outlet-->', `<div id='app'>${html}</div>`);
+        res.send(htmlStr);
+    }else{
+        res.status(context.status).send(`error code ${context.status}`)
+    }
+
+    
 }
 
 app.get('*', isProd ? render : (req, res) => {

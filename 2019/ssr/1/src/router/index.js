@@ -1,4 +1,5 @@
 import NestedRoute from './NestedRoute';
+import StatusRoute from './StatusRoute';
 import Bar from "../views/Bar";
 import Baz from "../views/Baz";
 import Foo from "../views/Foo";
@@ -38,5 +39,6 @@ const router = [
 
 export {
     router,
-    NestedRoute
+    NestedRoute,
+    StatusRoute
 }
