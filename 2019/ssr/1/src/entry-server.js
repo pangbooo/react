@@ -14,7 +14,7 @@ const createApp = (context, url) => {
     const App = () => {
         return (
             <StaticRouter context={context} location={url}>
-                <Root />
+                <Root setHead={(head) => App.head = head}/>
             </StaticRouter>
         )
     }

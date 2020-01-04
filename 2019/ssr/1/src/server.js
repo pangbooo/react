@@ -39,7 +39,13 @@ const render = (req, res) => {
     }
 
     if( !context.status ){ // 无status字段表示路由匹配成功
-        let htmlStr = template.replace('<!--react-ssr-outlet-->', `<div id='app'>${html}</div>`);
+        console.log('component', JSON.stringify(component, null, 2));
+        // 获取组件内的head对象，必须在组件renderToString后获取
+        let head = component.type.head.renderStatic(); 
+        let htmlStr = template
+                      .replace(/<title>.*<\/title>/, `${head.title.toString()}`)
+                      .replace('<!--react-ssr-head-->', `${head.meta.toString()}\n${head.link.toString()}`)
+                      .replace('<!--react-ssr-outlet-->', `<div id='app'>${html}</div>`)
         res.send(htmlStr);
     }else{
         res.status(context.status).send(`error code ${context.status}`)

@@ -4,12 +4,25 @@ import {BrowserRouter as Router,
         Redirect, 
         NavLink} from 'react-router-dom'
 import {router, NestedRoute, StatusRoute} from './router';
+import { Helmet } from 'react-helmet';
 import "./assets/app.css";
 
 class Root extends React.Component {
+    constructor(props){
+        super(props);
+        if(process.env.REACT_ENV === 'server'){
+            // 当前如果是服务端渲染时将Helmet设置给外层组件的head属性中
+            this.props.setHead(Helmet);
+        }
+    }
+    
     render() {
         return (
             <div>
+                    <Helmet>
+                        <title>This is App page</title>
+                        <meta name='keyworks' content='React SSR'></meta>
+                    </Helmet>
                     <div className='title'>This is a react ssr demo</div>
                     <ul className='nav'>
                         <li><NavLink to='/bar'>Bar</NavLink></li>
