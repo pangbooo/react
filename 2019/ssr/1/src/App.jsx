@@ -5,6 +5,7 @@ import {BrowserRouter as Router,
         NavLink} from 'react-router-dom'
 import {router, NestedRoute, StatusRoute} from './router';
 import { Helmet } from 'react-helmet';
+import createStore from "./redux/store";
 import "./assets/app.css";
 
 class Root extends React.Component {
@@ -58,11 +59,16 @@ let App;
 if(process.env.REACT_ENV == 'server'){
     App = Root;
 }else{
+    const Provider = require("react-redux").Provider;
+    const initialState = window.__INITIAL_STATE__;
+    const store = createStore(initialState);
     App = () => {
         return (
-            <Router>
-                <Root />
-            </Router>
+            <Provider store={store}>
+                <Router>
+                    <Root />
+                </Router>
+            </Provider>
         )
         
     }
