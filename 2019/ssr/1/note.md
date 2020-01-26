@@ -84,3 +84,42 @@ https://www.npmjs.com/package/webpack-dev-middleware
 ### webpack-hot-middleware
 该模块仅涉及将浏览器客户端连接到Webpack服务器并接收更新的机制。 它将订阅来自服务器的更改，并使用webpack的HMR API执行这些更改。 实际上，使您的应用程序能够使用热重载进行无缝更改超出了范围，并且通常由另一个库处理。（HotModuleReplacementPlugin）
 https://github.com/webpack-contrib/webpack-hot-middleware
+
+## NodeJS
+### 环境变量
+https://juejin.im/post/5a4ed5306fb9a01cbc6e2ee2
+https://www.webpackjs.com/guides/production/#%E6%8C%87%E5%AE%9A%E7%8E%AF%E5%A2%83
+
+- 1.process.env.NODE_ENV
+   process.env 是NodeJs 环境下的一个包含用户环境的对象
+   技术上讲，NODE_ENV 是一个由 Node.js 暴露给执行脚本的系统环境变量。通常用于决定在开发环境与生产环境(dev-vs-prod)下，服务器工具、构建脚本和客户端 library 的行为。
+
+#### 定义
+ 1)配置DefinePlugin
+``` javascript
+    new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production')
+    })
+ ```
+2) 通过设置package.json script 
+``` javascript
+{"dev" : "webpack-dev-server NODE_ENV='development' "}
+```
+
+3) webpack4+ 可以通过mode 来设置 process.env.NODE_ENV
+``` javascript
+{"dev" : "webpack-dev-server --config webpack.dev.js "}
+```
+
+``` javascript
+process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js' 
+```
+这样的条件语句，在 webpack 配置文件中，无法按照预期运行。
+
+
+
+- 2.env.NODE_ENV 
+npm sctipt -> {build: webpack --env.NODE_ENV=local --env.production --progress}
+
+console.log('NODE_ENV: ', env.NODE_ENV) // 'local'
+console.log('Production: ', env.production) // true

@@ -2,8 +2,18 @@ import {combineReducers} from 'redux';
 import * as ActionTypes from './actionTypes';
 
 const initialState = {
+    clientShouldLoad: true,
     topList: [],
     topDetail: {}
+}
+
+function clientShouldLoad(clientShouldLoad = initialState.clientShouldLoad, action) {
+  switch(action.type){
+    case ActionTypes.SET_CLIENT_LOAD:
+      return action.clientShouldLoad;
+    default: 
+      return clientShouldLoad
+  }
 }
 
 function topList(topList = initialState.topList, action) {
@@ -26,6 +36,7 @@ function topDetail(topDetail = initialState.topDetail, action) {
   
 
 const reducer = combineReducers({
+    clientShouldLoad,
     topList,
     topDetail
 });
