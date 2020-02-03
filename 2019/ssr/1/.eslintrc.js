@@ -1,11 +1,29 @@
 module.exports = {
-    "extends": [
-      "react-app",
-      "prettier/@typescript-eslint",
-      "plugin:prettier/recommended"
-    ],
-    "rules": {
-      "prettier/prettier": "error",
-      "react-hooks/exhaustive-deps": "off"
+  root: true,
+  parser: "babel-eslint",
+  env: {
+    es6: true,
+    browser: true,
+    node: true
+  },
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  parserOptions: {
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true
+    }
+  },
+  rules: {
+    "no-unused-vars": 0,
+    "react/display-name": 0,
+    "react/prop-types": 0
+  },
+  settings: {
+    react: {
+      version: "16.12.0"
     }
   }
+}

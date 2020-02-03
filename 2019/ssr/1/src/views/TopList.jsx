@@ -33,7 +33,7 @@ class TopList extends React.Component {
                               <p>
                                 <img src={item.picUrl} />
                                 {item.topTitle}
-                                {item.songList.map(song => <span>{song.songname}</span>)}
+                                {item.songList.map((song, index) => <span key={index}>{song.songname}</span>)}
                               </p>
                           </li>;
                     })

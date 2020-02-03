@@ -74,7 +74,7 @@ https://juejin.im/post/5ae9ae5e518825672f19b094
 > **注：babel 7 使用了 @babel 命名空间来区分官方包，因此以前的官方包 babel-xxx 改成了 @babel/xxx
 
 ## 开发环境热更新
-客户端-使用webpack-dev-middleware和webpack-hot-middleware这两个中间件。 
+使用webpack-dev-middleware和webpack-hot-middleware这两个中间件。 
 
 ### webpack-dev-middleware
 webpack-dev-middleware中间件不会把打包后的资源写入磁盘而是在内存中处理，当文件内容变动时会进行重新编译.
@@ -123,3 +123,16 @@ npm sctipt -> {build: webpack --env.NODE_ENV=local --env.production --progress}
 
 console.log('NODE_ENV: ', env.NODE_ENV) // 'local'
 console.log('Production: ', env.production) // true
+### cross-env
+croee-env npm包，运行跨平台设置和使用环境变量的脚本
+__windows不支持NODE_ENV=development的设置方式。__ 这个迷你的包(cross-env)能够提供一个设置环境变量的scripts，让你能够以unix方式设置环境变量，然后在windows上也能兼容运行。
+
+## eslint 
+- 1.eslint和webpack 需要安装eslint-loader， 在rules中配置
+- 2.eslint和react   需要安装elint-plugin-react
+```javascript
+"extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ]
+```

@@ -32,7 +32,7 @@ if(isProd){
 }
 
 const render = (req, res) => {
-    console.log('--------------------- enter server----------------------')
+    console.log('------- enter server------')
     console.log('visit url', req.url);
 
     let store = createStore({});
