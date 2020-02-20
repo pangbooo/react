@@ -86,46 +86,55 @@ https://www.npmjs.com/package/webpack-dev-middleware
 https://github.com/webpack-contrib/webpack-hot-middleware
 
 ## NodeJS
-### 环境变量
+### 1.环境变量 / process.env.NODE_ENV
 https://juejin.im/post/5a4ed5306fb9a01cbc6e2ee2
 https://www.webpackjs.com/guides/production/#%E6%8C%87%E5%AE%9A%E7%8E%AF%E5%A2%83
 
-- 1.process.env.NODE_ENV
-   process.env 是NodeJs 环境下的一个包含用户环境的对象
-   技术上讲，NODE_ENV 是一个由 Node.js 暴露给执行脚本的系统环境变量。通常用于决定在开发环境与生产环境(dev-vs-prod)下，服务器工具、构建脚本和客户端 library 的行为。
+process.env 是NodeJs 环境下的一个包含用户环境的对象
+> 技术上讲，NODE_ENV 是一个由 Node.js 暴露给执行脚本的系统环境变量。通常用于决定在开发环境与生产环境(dev-vs-prod)下，server tools(服务期工具)、build scripts(构建脚本) 和 client-side libraries(客户端库) 的行为。然而，与预期相反，无法在构建脚本 webpack.config.js 中，将 process.env.NODE_ENV 设置为 "production"，请查看 #2537。因此，在 webpack 配置文件中，process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js' 这样的条件语句，无法按照预期运行。
+
 
 #### 定义
- 1)配置DefinePlugin
+通过设置package.json script 
+``` javascript
+{"dev" : "webpack-dev-server NODE_ENV='development' "}
+```
+__问题__：      
+在编译时候，这样的条件语句，在 webpack 配置文件中，无法按照预期运行。
+``` javascript
+process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js' 
+```
+
+
+__解决__：        
+配置DefinePlugin。DefinePlugin 允许创建一个在__编译时__可以配置的全局常量。
+
 ``` javascript
     new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
     })
  ```
-2) 通过设置package.json script 
-``` javascript
-{"dev" : "webpack-dev-server NODE_ENV='development' "}
+- 从 webpack v4 开始, 指定 mode 会自动地配置 DefinePlugin：
+```javascript
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+});
+```
+任何位于 /src 的本地代码都可以关联到 process.env.NODE_ENV 环境变量，所以以下检查也是有效的：
+```javascript
+if (process.env.NODE_ENV !== 'production') {
+   console.log('Looks like we are in development mode!');
+ }
 ```
 
-3) webpack4+ 可以通过mode 来设置 process.env.NODE_ENV
-``` javascript
-{"dev" : "webpack-dev-server --config webpack.dev.js "}
-```
-
-``` javascript
-process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js' 
-```
-这样的条件语句，在 webpack 配置文件中，无法按照预期运行。
-
-
-
-- 2.env.NODE_ENV 
-npm sctipt -> {build: webpack --env.NODE_ENV=local --env.production --progress}
-
-console.log('NODE_ENV: ', env.NODE_ENV) // 'local'
-console.log('Production: ', env.production) // true
-### cross-env
+### 2.cross-env
 croee-env npm包，运行跨平台设置和使用环境变量的脚本
 __windows不支持NODE_ENV=development的设置方式。__ 这个迷你的包(cross-env)能够提供一个设置环境变量的scripts，让你能够以unix方式设置环境变量，然后在windows上也能兼容运行。
+```
+"scripts": {
+    "start": "cross-env NODE_ENV=production node src/server.js",
+  }
+```
 
 ## eslint 
 - 1.eslint和webpack 需要安装eslint-loader， 在rules中配置
