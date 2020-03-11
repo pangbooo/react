@@ -56,6 +56,47 @@ output.publicPath + 'style.[chunkhash].css' = '/dist/style.[chunkhash].css'
 参考：
 https://juejin.im/post/5ae9ae5e518825672f19b094
 
+### 5.HMR
+- 1) webpack --watch
+- 2) webpack-dev-server
+- 3) *express with webpack-dev-middleware and webpack-hot-middleware
+
+### 6.代码分离
+- 1）入口起点：使用 entry 配置手动地分离代码。
+```javascript
+entry: {
+        app: './src/index.js',
+        another: './src/another-module.js'
+    },
+```
+
+- 2)防止重复(prevent duplication) 
+- 3)动态导入
+
+#### react Code Splitting
+reacttraining.com/react-router/web/guides/code-splitting
+- 1) webpack
+- 2) @babel/plugin-syntax-dynamic-import 
+> The plugin simply allows Babel to parse dynamic imports so webpack can bundle them as a code split
+- 3) loadable-components 
+> is a library for loading components with dynamic imports.It handles all sorts of edge cases automatically and makes code splitting simple
+
+```javascript
+import loadable from '@loadable/component';
+import Loading from './Loading.js';
+
+const LoadingComponent = loadable(() => import('./Dashboard.js'), {
+  fallback: <Loading />
+});
+
+export default class LoadableDashboard extends React.Componet {
+  render(){
+    return <LoadableComponet />;
+  }
+}
+
+```
+
 ## babel
 ### Polyfill
 - 1.@babel/polyfill 模块包括 core-js 和自定义 regenerator runtime 来模拟完整的 ES2015+ 环境。
@@ -127,7 +168,16 @@ if (process.env.NODE_ENV !== 'production') {
  }
 ```
 
-### 2.cross-env
+### 2.process.argv
+process.argv 属性返回一个数组，其中包含当启动 Node.js 进程时传入的命令行参数。                         
+第一个元素是 process.execPath。 如果需要访问 argv[0] 的原始值，参阅 process.argv0。 第二个元素将是正在执行的 JavaScript 文件的路径。 其余元素将是任何其他命令行参数。
+```javascript
+[ '/home/pangbo/.nvm/versions/node/v10.12.0/bin/node',
+  '/home/pangbo/pb/workspace/react-music-player/script/customized-build',
+  'start' ]
+```
+
+### 3.cross-env
 croee-env npm包，运行跨平台设置和使用环境变量的脚本
 __windows不支持NODE_ENV=development的设置方式。__ 这个迷你的包(cross-env)能够提供一个设置环境变量的scripts，让你能够以unix方式设置环境变量，然后在windows上也能兼容运行。
 ```
@@ -145,3 +195,66 @@ __windows不支持NODE_ENV=development的设置方式。__ 这个迷你的包(cr
     "plugin:react/recommended"
   ]
 ```
+
+## 浏览器相关
+### 1.浏览器同源政策及其规避方法
+https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html
+
+#### 概念
+1）同源：协议, 域名, 端口 相同
+http://www.example.com/dir/page.html
+
+- 协议： http
+- 域名： www.example.com
+- 端口： 默认80
+
+2）限制范围
+- Cookie, LocalStorage, IndexDB 无法读取
+- DOM 无法获取
+- AJAX 请求不能发送
+
+### Cookie
+...
+### iframe
+对于完全不同源的网站，目前有三种方法，可以解决跨域窗口的通信问题。
+- 片段识别符
+- window.name
+- 跨文档通信API(Cross-document messagin) 
+....
+
+### AJAX
+同源政策规定，AJAX请求只能发给同源的网址，否则就报错。
+除了架设服务器代理（浏览器请求同源服务器，再由后者请求外部服务），有三种方法规避这个限制。
+
+- JSONP 
+- WebSocket
+- __CORS__
+
+#### JSONP
+原理： 网页通过添加一个<script>元素，向服务器请求JSON数据，这种做法不受同源政策限制。                             
+      服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。
+```javascript
+function addScriptTag(src){
+  var script = document.createElement('script');
+  script.setAttribute('type', 'text/javascript');
+  script.src = src;
+  document.body.appendChild(script);
+}
+windown.onload = function(){
+  addScriptTag('http://example.com/ip?callback=foo')
+}
+function foo(data){
+  console.log('Your public IP address is: ' + data.ip)
+}
+```
+__注意，该请求的查询字符串有一个callback参数，用来指定回调函数的名字，这对于JSONP是必需的。服务器收到这个请求以后，会将数据放在回调函数的参数位置返回。__
+
+```javascript
+foo({
+  "ip": "8.8.8.8"
+});
+```
+优点：简单适用，老式浏览器全部支持
+缺点： 1.只能法GET请求。 2.后台需要配合修改 （服务端必须要调整以返回callback(...)）
+
+
