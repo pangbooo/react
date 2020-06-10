@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Topics from './pages/Topics';
 import NoMatch from './pages/NoMatch';
 import Memoize from './pages/memoize';
+import RefForward from "./pages/RefForward";
 const list =[
   {
     id: 0,
@@ -30,6 +31,9 @@ function Menu() {
         <li>
           <NavLink to="/memoize" activeClassName="active">Memoize</NavLink>
         </li>
+        <li>
+          <NavLink to="/refs" activeClassName="active">Ref转发</NavLink>
+        </li>
       </ul>
     );
 }
@@ -50,6 +54,7 @@ function AppRouter(){
                       <Route path='/about' component={About}></Route>
                       <Route path='/topics' component={Topics}></Route>
                       <Route path='/memoize' render={() => <Memoize list={list}/>} ></Route>
+                      <Route path='/refs' component={RefForward}></Route>
                       {/* when none of the above match, <NoMatch> will be rendered */}
                       <Route component={NoMatch}></Route>
                   </Switch>
