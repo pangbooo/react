@@ -11,7 +11,7 @@ import React from "react";
 
 // 使用refs转发
 const FancyButton = React.forwardRef((props, ref) => (
-    <button ref={ref} className="FancyButton">
+    <button ref={ref} className="FancyButton" onClick={props.handleClick}>
         {props.children}
     </button>
 ));

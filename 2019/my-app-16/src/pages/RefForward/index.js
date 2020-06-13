@@ -1,15 +1,34 @@
 import React from "react";
+import { Fragment } from 'react';
 import FancyButton from '../../components/FancyButton';
+import LogProps from '../../components/HOC/logProps';
+
+const HOCFancyButton = LogProps(FancyButton);
 
 class RefForward extends React.Component {
     constructor(props){
         super(props);
-        this.ref = React.createRef()
+        this.ref = React.createRef();
+        this.hocRef = React.createRef();
+    }
+
+    handleClick(){
+        console.log('this ref is button', this.ref.current);
     }
 
     render(){
         return (
-            <FancyButton ref={this.ref}>Click me</FancyButton>
+            <Fragment>
+                <div>
+                    <h5> basic RefForward</h5>
+                    <FancyButton ref={this.ref} handleClick={this.handleClick.bind(this)}>Click me</FancyButton>
+                </div>
+
+                <div>
+                    <h5> HOC RefForward</h5>
+                    <HOCFancyButton ref={this.hocRef} handleClick={this.handleClick.bind(this)}>Click me too</HOCFancyButton>
+                </div>
+            </Fragment>
         )
     }
 }
