@@ -34,6 +34,7 @@ if(isProd){
 const render = (req, res) => {
     console.log('------- enter server------')
     console.log('visit url', req.url);
+    console.log('query', req.query)
 
     let store = createStore({});
     let preloadedState = {};
@@ -41,6 +42,7 @@ const render = (req, res) => {
     
     //匹配路由
     let matchs = matchRoutes(router, req.path);
+    console.log('matchs', matchs);
     promises = matchs.map(({ route, match }) => {
         const asyncData = route.component.asyncData;
         //match.params 获取匹配的路由参数

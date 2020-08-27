@@ -7,6 +7,6 @@ export default (store) => {
   return createStore(
     reducer,
     store,
-    applyMiddleware(thunkMiddleware) // 允许store能dispatch函数
+    applyMiddleware(thunkMiddleware) // 允许store能dispatch【函数】
   );
 }

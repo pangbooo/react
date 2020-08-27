@@ -25,6 +25,10 @@ export function fetchTopList(){
               dispatch(setClientLoad(false))
             }
         })
+        // .catch(err => 
+          // 这里catch， 在server就不会catch 500 error
+          // console.log('err.....',err)
+        // )
     }
 }
 

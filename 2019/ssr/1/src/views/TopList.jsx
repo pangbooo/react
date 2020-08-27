@@ -4,7 +4,8 @@ import {fetchTopList, setClientLoad} from '../redux/action'
 
 class TopList extends React.Component {
 
-  static asyncData(store) {
+  static asyncData(store, params) {
+    console.log(store, params)
     return store.dispatch(fetchTopList());
   }
 
@@ -19,7 +20,7 @@ class TopList extends React.Component {
   }
 
     render(){
-      console.log('props', JSON.stringify(this.props,null, 2))
+      // console.log('props', JSON.stringify(this.props,null, 2))
       const { topList } = this.props;
         return (
             <div>
