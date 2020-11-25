@@ -8,7 +8,9 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const webpackConfig = merge(baseWebpackConfig, {
     entry: {
-        app: './src/entry-client.js', //默认值为 ./src
+        app: './src/entry-client.js', 
+            //app为打包的文件名基础
+            //默认值为 ./src
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
