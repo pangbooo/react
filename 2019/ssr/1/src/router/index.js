@@ -6,6 +6,7 @@ import Foo from "../views/Foo";
 import TopList from "../containers/TopList";
 import Parent from "../views/Parent";
 import Child from "../views/Child";
+import Login from "../views/Login";
 
 const router = [
     {
@@ -34,7 +35,12 @@ const router = [
                 component: Child
             }
         ]
-    }
+    },
+    {
+        path: '/login',
+        component: Login,
+        exact: true
+    },
 ];
 
 export {
