@@ -32,6 +32,7 @@ class Root extends React.Component {
                         <li><NavLink to='/foo'>Foo</NavLink></li>
                         <li><NavLink to='/top-list'>TopList</NavLink></li>
                         <li><NavLink to='/parent'>Parent</NavLink></li>
+                        <li><NavLink to='/login'>login</NavLink></li>
                     </ul>
 
                     <div className='view'>

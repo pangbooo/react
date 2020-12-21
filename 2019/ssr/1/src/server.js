@@ -1,6 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const session = require('express-session');
+
 const ReactDOMServer = require('react-dom/server');
 const matchRoutes = require('react-router-config').matchRoutes;
 const app = express();
@@ -31,9 +33,11 @@ if(isProd){
     })
 }
 
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
+
 const render = (req, res) => {
-    console.log('------- enter server------')
-    console.log('visit url', req.url);
+    // console.log('------- enter server------')
+    // console.log('visit url', req.url);
 
     let store = createStore({});
     let preloadedState = {};
@@ -63,7 +67,7 @@ const render = (req, res) => {
         let context = {};
         let component = createApp(context,  req.url, store);
         let html = ReactDOMServer.renderToString(component);
-        console.log('context', context);
+        // console.log('context', context);
 
         if(context.url){ // 当发生重定向时，静态路由会设置url
             res.redirect(context.url);
@@ -89,6 +93,18 @@ const render = (req, res) => {
 
 }
 
+app.use(function(req,res, next){
+    console.log(req.session,req.sessionID);
+    next()
+})
+app.get('/logout', function(req, res, next){
+    console.log('logout...')
+    req.session.destroy(function(err) {
+        res.clearCookie('connect.sid', {path: '/'});
+        res.redirect('/');
+      });
+
+});
 
 app.get('*', isProd ? render : (req, res) => {
     // 等待客户端和服务端打包完成后进行render
