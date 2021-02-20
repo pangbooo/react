@@ -126,7 +126,16 @@ function FriendListItem(props) {
 useContext, useReducer...
 
 ### 使用 State Hook
-React 是如何把对 Hook 的调用和组件联系起来的？
+#### useState
+1. 调用useState方法时，定义state变量 （一般来说，在函数退出后变量就会”消失”，而 state 中的变量会被 React 保留。）
+2. useState() 方法里面唯一的参数就是初始 state
+3. useState()方法返回值为当前state以及更新state的函数
+
+* React 是如何把对 Hook 的调用和组件联系起来的？
+每个组建内部又一个记忆单元格列表，用来储存数据的Javascript对象
+
+* 我应该使用单个还是多个 state 变量？
+我们推荐把 state 切分成多个 state 变量，每个变量包含的不同值会在同时发生变化。而且利于函数组建的拆分。
 
 ### 使用 Effect Hook
 #### 需要清除的 effect
@@ -222,3 +231,8 @@ useEffect(() => {
 那么 React 怎么知道哪个 state 对应哪个 useState？答案是 React 靠的是 Hook 调用的顺序。
 
 ### 自定义 Hook
+
+
+### ⚠️使用时于class的不同点
+1. Hook 的每次调用都有一个完全独立的 state —— 因此你可以在单个组件中多次调用同一个自定义 Hook。
+2. set函数，更新 state 变量总是替换它而不是合并它。
