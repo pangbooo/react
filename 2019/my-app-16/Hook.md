@@ -138,45 +138,14 @@ useContext, useReducer...
 我们推荐把 state 切分成多个 state 变量，每个变量包含的不同值会在同时发生变化。而且利于函数组建的拆分。
 
 ### 使用 Effect Hook
+> 如果你熟悉 React class 的生命周期函数，你可以把 useEffect Hook 看做 componentDidMount，componentDidUpdate 和 componentWillUnmount 这三个函数的组合。
+#### 无需清除的 effect
+1. 当 React 渲染组件时，会保存已使用的 effect，并在更新完 DOM 后执行它。这个过程在每次渲染时都会发生，包括首次渲染。
+2. 每次我们重新渲染，都会生成新的 effect，替换掉之前的。某种意义上讲，effect 更像是渲染结果的一部分 —— 每个 effect “属于”一次特定的渲染。
+3. useEffect调用的effct不会阻塞浏览器更新屏幕。大多effect不需要同步执行。
+
+
 #### 需要清除的 effect
-- 使用class
-```javascript
-class FriendStatus extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOnline: null };
-    this.handleStatusChange = this.handleStatusChange.bind(this);
-  }
-
-  componentDidMount() {
-    ChatAPI.subscribeToFriendStatus(
-      this.props.friend.id,
-      this.handleStatusChange
-    );
-  }
-
-  componentWillUnmount() {
-    ChatAPI.unsubscribeFromFriendStatus(
-      this.props.friend.id,
-      this.handleStatusChange
-    );
-  }
-
-  handleStatusChange(status) {
-    this.setState({
-      isOnline: status.isOnline
-    });
-  }
-
-  render() {
-    if (this.state.isOnline === null) {
-      return 'Loading...';
-    }
-    return this.state.isOnline ? 'Online' : 'Offline';
-  }
-}
-```
-
 - 使用 Hook 的示例
 ```javascript
 import React, { useState, useEffect } from 'react';
@@ -228,7 +197,9 @@ useEffect(() => {
 > - 只在最顶层使用 Hook (不要在循环，条件或嵌套函数中调用 Hook)
 > - 只在 React 函数中调用 Hook
 
-那么 React 怎么知道哪个 state 对应哪个 useState？答案是 React 靠的是 Hook 调用的顺序。
+* 那么 React 怎么知道哪个 state 对应哪个 useState？<br />
+答案是 React 靠的是 Hook 调用的顺序。
+
 
 ### 自定义 Hook
 
