@@ -172,8 +172,8 @@ function FriendStatus(props) {
 }
 
 ```
-> - 这是 effect 可选的清除机制。每个 effect 都可以返回一个清除函数。如此可以将添加和移除订阅的逻辑放在一起。它们都属于 effect 的一部分。
-> - React 会在组件卸载的时候执行清除操作。
+- 这是 effect 可选的清除机制。每个 effect 都可以返回一个清除函数。如此可以将添加和移除订阅的逻辑放在一起。它们都属于 effect 的一部分。
+- React 会在组件卸载的时候执行清除操作。
 
 #### 提示: 通过跳过 Effect 进行性能优化
 在某些情况下，每次渲染后都执行清理或者执行 effect 可能会导致性能问题。在 class 组件中，我们可以通过在 componentDidUpdate 中添加对 prevProps 或 prevState 的比较逻辑解决：
@@ -190,12 +190,12 @@ useEffect(() => {
   document.title = `You clicked ${count} times`;
 }, [count]); // 仅在 count 更改时更新
 ```
-> - 如果你要使用此优化方式，请确保数组中包含了所有外部作用域中会随时间变化并且在 effect 中使用的变量，否则你的代码会引用到先前渲染中的旧变量。
-> - 如果想执行只运行一次的 effect（仅在组件挂载和卸载时执行），可以传递一个空数组（[]）作为第二个参数。这就告诉 React 你的 effect 不依赖于 props 或 state 中的任何值，所以它永远都不需要重复执行。  
+- 如果你要使用此优化方式，请确保数组中包含了所有外部作用域中会随时间变化并且在 effect 中使用的变量，否则你的代码会引用到先前渲染中的旧变量。
+- 如果想执行只运行一次的 effect（仅在组件挂载和卸载时执行），可以传递一个空数组（[]）作为第二个参数。这就告诉 React 你的 effect 不依赖于 props 或 state 中的任何值，所以它永远都不需要重复执行。  
 
 ### Hook 规则 
-> - 只在最顶层使用 Hook (不要在循环，条件或嵌套函数中调用 Hook)
-> - 只在 React 函数中调用 Hook
+- 只在最顶层使用 Hook (不要在循环，条件或嵌套函数中调用 Hook)
+- 只在 React 函数中调用 Hook
 
 * 那么 React 怎么知道哪个 state 对应哪个 useState？<br />
 答案是 React 靠的是 Hook 调用的顺序。
