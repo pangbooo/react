@@ -206,6 +206,16 @@ useEffect(() => {
 2. 在两个组建中使用Hook不会共享state。
 3. 每次调用 Hook，它都会获取独立的 state。
 
+### Hook API
+#### useState
+#### useEffect
+#### useContext
+#### useReducer
+```javascript
+const [state, dispatch] = useReducer(reducer, initialArg, init);
+```
+
+
 ### ⚠️使用时于class的不同点
 1. Hook 的每次调用都有一个完全独立的 state —— 因此你可以在单个组件中多次调用同一个自定义 Hook。
 2. set函数，更新 state 变量总是替换它而不是合并它。
