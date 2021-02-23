@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
+import twiceSet from './pages/twiceSet';
+
 const list =[
   {
     id: 0,
@@ -19,7 +21,7 @@ function Menu() {
           <NavLink to="/" activeClassName="active" exact>Home</NavLink>
         </li>
         <li>
-          <NavLink to="/about" activeClassName="active">About</NavLink>
+          <NavLink to="/twiceSet" activeClassName="active">twiceSet</NavLink>
         </li>
       </ul>
     );
@@ -38,6 +40,7 @@ function AppRouter(){
                 <div className='content'>
                   <Switch>
                       <Route path='/' component={Home} exact></Route>
+                      <Route path='/twiceSet' component={twiceSet} exact></Route>
                       {/* when none of the above match, <NoMatch> will be rendered */}
                       <Route component={NoMatch}></Route>
                   </Switch>
