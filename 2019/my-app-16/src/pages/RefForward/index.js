@@ -2,6 +2,7 @@ import React from "react";
 import { Fragment } from 'react';
 import FancyButton from '../../components/FancyButton';
 import LogProps from '../../components/HOC/logProps';
+import ChildButton from '../../components/ChildButton';
 
 const HOCFancyButton = LogProps(FancyButton);
 
@@ -10,15 +11,26 @@ class RefForward extends React.Component {
         super(props);
         this.ref = React.createRef();
         this.hocRef = React.createRef();
+        this.child = React.createRef();
     }
 
     handleClick(){
         console.log('this ref is button', this.ref.current);
     }
 
+    handleClickChild(){
+        console.log(this.child.current)
+        this.child.current.getAlert();
+    }
+
     render(){
         return (
             <Fragment>
+                <div>
+                    <h5>parent component call child component's function</h5>
+                    <ChildButton ref={this.child}></ChildButton>
+                    <button onClick={this.handleClickChild.bind(this)}>parent button</button>
+                </div>
                 <div>
                     <h5> basic RefForward</h5>
                     <FancyButton ref={this.ref} handleClick={this.handleClick.bind(this)}>Click me</FancyButton>

@@ -28,11 +28,11 @@ function Menu() {
         <li>
           <NavLink to="/topics" activeClassName="active">Topics</NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/memoize" activeClassName="active">Memoize</NavLink>
-        </li>
+        </li> */}
         <li>
-          <NavLink to="/refs" activeClassName="active">Ref转发</NavLink>
+          <NavLink to="/refs" activeClassName="active">Ref</NavLink>
         </li>
       </ul>
     );
