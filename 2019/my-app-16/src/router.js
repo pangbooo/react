@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Counter from './pages/Counter'
+import Ref from './pages/Ref'
 import NoMatch from './pages/NoMatch';
 const list =[
   {
@@ -22,6 +23,9 @@ function Menu() {
         <li>
           <NavLink to="/counter" activeClassName="active" exact>reducer Counter</NavLink>
         </li>
+        <li>
+          <NavLink to="/useRef" activeClassName="active" exact>useRef</NavLink>
+        </li>
       </ul>
     );
 }
@@ -40,6 +44,7 @@ function AppRouter(){
                   <Switch>
                       <Route path='/' component={Home} exact></Route>
                       <Route path='/counter' component={Counter} exact></Route>
+                      <Route path='/useRef' component={Ref} exact></Route>
                       {/* when none of the above match, <NoMatch> will be rendered */}
                       <Route component={NoMatch}></Route>
                   </Switch>
