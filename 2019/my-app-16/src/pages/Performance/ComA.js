@@ -7,6 +7,6 @@ function ComA(){
 
 //子组件更新条件：
 // 1. 父组件render， 子组件重新render了（需要优化）
-// 2. 自身 state，props，forceUpdate()
+// 2. 子组件自身 state，props，forceUpdate()
 
 export default ComA;

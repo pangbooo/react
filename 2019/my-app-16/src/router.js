@@ -35,7 +35,7 @@ function Menu() {
           <NavLink to="/refs" activeClassName="active">Ref</NavLink>
         </li>
         <li>
-          <NavLink to="/test" activeClassName="active">Test</NavLink>
+          <NavLink to="/performance" activeClassName="active">Performance</NavLink>
         </li>
       </ul>
     );
@@ -47,7 +47,7 @@ const Topics = lazy(() => import ("./pages/Topics"))
 const RefForward = lazy(() => import ("./pages/RefForward"))
 const NoMatch = lazy(() => import ("./pages/NoMatch"))
 const Memoize = lazy(() => import ("./pages/memoize"))
-const Test = lazy(() => import ("./pages/Test"))
+const Performance = lazy(() => import ("./pages/Performance"))
 
 function AppRouter(){
     return (
@@ -67,7 +67,7 @@ function AppRouter(){
                         <Route path='/topics' component={Topics}></Route>
                         <Route path='/memoize' render={() => <Memoize list={list}/>} ></Route>
                         <Route path='/refs' component={RefForward}></Route>
-                        <Route path='/test' component={Test}></Route>
+                        <Route path='/performance' component={Performance}></Route>
                         {/* when none of the above match, <NoMatch> will be rendered */}
                         <Route component={NoMatch}></Route>
                     </Switch>

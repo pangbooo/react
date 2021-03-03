@@ -13,7 +13,7 @@ const ComponentInput = memo(function( {notifyFatherChange} ){
     return <input value={inputValue} onChange={handerChange}/>
 })
 
-class Test extends React.Component{
+class Performance extends React.Component{
     constructor(props){
         super(props);
         this.formData = {}
@@ -47,4 +47,4 @@ class Test extends React.Component{
     }
 }
 
-export default Test
+export default Performance
