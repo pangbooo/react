@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ComB extends React.PureComponent{
+class ComB extends React.Component{
     constructor(props){
         super(props)
     }

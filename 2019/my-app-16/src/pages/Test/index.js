@@ -3,30 +3,34 @@ import ComA from './ComA';
 import ComB from './ComB';
 import ComC from './ComC';
 
-const ComponentInput = memo(function({notifyFatherChange }){
+const ComponentInput = memo(function( {notifyFatherChange} ){
+    console.log('ComponentInput change..')
     const [inputValue, setInputValue ] = useState('');
+    const handerChange = useMemo(()=> (e) => {
+        setInputValue(e.target.value);
+        notifyFatherChange && notifyFatherChange(e.target.value)
+    },[]);
+    return <input value={inputValue} onChange={handerChange}/>
 })
 
 class Test extends React.Component{
     constructor(props){
-        super(props)
-        this.state={
-            inputValue:''
-        }
+        super(props);
+        this.formData = {}
     }
     handerChange(e){
         this.setState({ inputValue:e.target.value  })
     }
     
     render(){
-        const { inputValue } = this.state
         return <div>
             { /*  我们增加三个子组件 */ }
             <ComA />
             <ComB />
             <ComC />
             <div className="box" >
-                <input  value={inputValue}  onChange={ (e)=> this.handerChange(e) } />
+                <ComponentInput notifyFatherChange={(value) => {this.formData.inputValue = value}}/>
+                <button onClick={()=> console.log(this.formData)} >打印数据</button>
             </div>
             {/* 我们首先来一个列表循环 */}
             {
