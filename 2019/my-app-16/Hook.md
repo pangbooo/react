@@ -219,3 +219,7 @@ const [state, dispatch] = useReducer(reducer, initialArg, init);
 ### ⚠️使用时于class的不同点
 1. Hook 的每次调用都有一个完全独立的 state —— 因此你可以在单个组件中多次调用同一个自定义 Hook。
 2. set函数，更新 state 变量总是替换它而不是合并它。
+
+### ⚠️Hook的优势/class组件不足
+* 在组件之间复用状态逻辑很难（Hook 使你在无需修改组件结构的情况下复用状态逻辑）
+* 复杂组件变得难以理解（Hook 将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据）
