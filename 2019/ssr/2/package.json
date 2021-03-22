@@ -1,0 +1,31 @@
+{
+  "name": "ssr-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./build/bundle.js",
+    "build": "rimraf build && npm run build:client && npm run build:server",
+    "build:client": "webpack --config config/webpack.config.client.js",
+    "build:server": "webpack --config config/webpack.config.server.js"
+  },
+  "author": "pangbo",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "rimraf": "^3.0.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^5.7.3",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
