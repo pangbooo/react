@@ -1,7 +1,11 @@
-const express = require('express')
-const app = express()
+import express from 'express';
+import React from 'react';
+import {renderToString} from 'react-dom/server';
+import Home from './containers/Home';
+
+const app = express();
 const port = 3000;
-const Home = require('./containers/Home');
+const content = renderToString(<Home />)
 
 app.get('/', (req, res) => {
   res.send(`
@@ -10,7 +14,7 @@ app.get('/', (req, res) => {
         <title>ssr</title>
       </head>
       <body>
-        <div id="root">hello world</div>
+        <div id="root">${content}</div>
       </body>
     </html>
   `)

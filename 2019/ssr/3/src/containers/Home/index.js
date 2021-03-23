@@ -1,12 +1,11 @@
 // containers/Home.js
-const React = require('react')
+import React from 'react';
 const Home = () => {
   return (
     <div>
-      <div>This is sanyuan</div>
+      <div>Home</div>
     </div>
   )
 }
-module.exports = {
-  default: Home
-}
+
+export default Home
