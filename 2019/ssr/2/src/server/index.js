@@ -1,6 +1,7 @@
 // server/index.js
 import express from 'express';
 import { renderToString } from 'react-dom/server';
+import React from 'react';
 import Home from '../containers/Home';
 
 const app = express();
