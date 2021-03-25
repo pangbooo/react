@@ -1,9 +1,13 @@
 // containers/Home.js
 import React from 'react';
+import Header from '../../components/Header.js';
 
 const Login = () => {
   return (
-      <div>Login</div>
+      <div>
+        <Header />
+        Login
+      </div>
   )
 }
 
