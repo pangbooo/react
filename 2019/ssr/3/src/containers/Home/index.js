@@ -1,15 +1,21 @@
 // containers/Home.js
 import React from 'react';
 import Header from '../../components/Header.js';
+import {connect} from 'react-redux';
 
-const Home = () => {
-  console.log('Home...')
+const Home = (props) => {
+  console.log('Home...',props)
   return (
       <div onClick={() => {console.log('click Home')}}>
         <Header />
-        Home
+        Hello, {props.name}
       </div>
   )
 }
 
-export default Home
+const mapStateToProps  = (state) => ({
+  name: state.name
+});
+
+export default connect(mapStateToProps , null)(Home)
+
