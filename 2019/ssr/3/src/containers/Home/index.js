@@ -4,7 +4,7 @@ import Header from '../../components/Header.js';
 import {connect} from 'react-redux';
 
 const Home = (props) => {
-  console.log('Home...',props)
+  console.log('Home...')
   return (
       <div onClick={() => {console.log('click Home')}}>
         <Header />
