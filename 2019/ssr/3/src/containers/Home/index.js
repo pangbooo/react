@@ -1,10 +1,14 @@
 // containers/Home.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../../components/Header.js';
 import {connect} from 'react-redux';
+import { getHomeList } from './store/actions';
 
 const Home = (props) => {
-  console.log('Home...')
+  useEffect(() => {
+    props.getHomeList()
+  });
+
   return (
       <div onClick={() => {console.log('click Home')}}>
         <Header />
@@ -14,8 +18,14 @@ const Home = (props) => {
 }
 
 const mapStateToProps  = (state) => ({
-  name: state.name
+  name: state.home.name
 });
 
-export default connect(mapStateToProps , null)(Home)
+const mapDispatchToProps = dispatch => ({
+  getHomeList(){
+    dispatch(getHomeList())
+  }
+})
+
+export default connect(mapStateToProps , mapDispatchToProps)(Home)
 
