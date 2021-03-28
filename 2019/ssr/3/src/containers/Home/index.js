@@ -13,12 +13,18 @@ const Home = (props) => {
       <div onClick={() => {console.log('click Home')}}>
         <Header />
         Hello, {props.name}
+          {
+            props.newsList.map(item => (
+              <div key={item.id}>{item.title}</div>
+            ))
+          }
       </div>
   )
 }
 
 const mapStateToProps  = (state) => ({
-  name: state.home.name
+  name: state.home.name,
+  newsList: state.home.newsList
 });
 
 const mapDispatchToProps = dispatch => ({
