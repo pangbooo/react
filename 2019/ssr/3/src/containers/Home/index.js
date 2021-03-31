@@ -50,8 +50,9 @@ class Home extends React.Component{
   }
 }
 
-Home.loadData = () => {
+Home.loadData = (store) => {
   //服务端渲染前，获取异步数据
+  return store.dispatch(getHomeList())
 }
 
 const mapStateToProps  = (state) => ({
