@@ -3,9 +3,9 @@ import ReactDom from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Routes from '../Routes'
 import {Provider} from 'react-redux'
-import getStore from '../store'
+import {getClientStore} from '../store'
 
-const store = getStore();
+const store = getClientStore();
 const App = () => {
     return (
         <Provider store={store}>

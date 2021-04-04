@@ -28,6 +28,11 @@ export const render = (req, store, routes) => {
             <body>
               <div id="root">${content}</div>
               <!--引入客户端打包js文件，执行事件绑定-->
+              <script>
+                window.context = {
+                  state: ${JSON.stringify(store.getState())}
+                }
+              </script>
               <script src='/index.js'></script> 
             </body>
           </html>

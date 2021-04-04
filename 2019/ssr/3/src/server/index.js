@@ -2,7 +2,7 @@ import express from 'express';
 import { matchRoutes } from "react-router-config"; //react-router-config 可以匹配多级路由
 import { render } from './util';
 import routes from '../Routes';
-import getStore from '../store'
+import { getStore } from '../store'
 
 const app = express();
 app.use(express.static('public'));
