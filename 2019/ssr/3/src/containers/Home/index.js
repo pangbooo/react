@@ -29,7 +29,7 @@ class Home extends React.Component{
 
   componentDidMount(){
     if(!this.props.newsList.length){
-      this.props.getHomeList()
+      this.props.getHomeList(false)
     }
   }
 
@@ -54,7 +54,7 @@ class Home extends React.Component{
 
 Home.loadData = (store) => {
   //服务端渲染前，获取异步数据
-  return store.dispatch(getHomeList())
+  return store.dispatch(getHomeList(true))
 }
 
 const mapStateToProps  = (state) => ({

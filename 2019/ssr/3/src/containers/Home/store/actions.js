@@ -6,9 +6,15 @@ const changeList = (list) => ({
     list
 })
 
-export const getHomeList = () => {
+export const getHomeList = (server) => {
+    let url = '';
+    if(server){
+        url = 'http://localhost:4000/api/getNews'
+    }else{
+        url = '/api/getNews'
+    }
     return (dispatch) => {
-        return axios.get('/api/getNews').then(res => {
+        return axios.get(url).then(res => {
             const list = res.data.data;
             dispatch(changeList(list));
         })
