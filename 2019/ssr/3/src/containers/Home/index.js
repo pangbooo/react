@@ -1,26 +1,7 @@
 // containers/Home.js
 import React, { useEffect } from 'react';
-import Header from '../../components/Header.js';
 import {connect} from 'react-redux';
 import { getHomeList } from './store/actions';
-
-// const Home = (props) => {
-//   useEffect(() => {
-//     props.getHomeList()
-//   });
-
-//   return (
-//       <div onClick={() => {console.log('click Home')}}>
-//         <Header />
-//         Hello, {props.name}
-//           {
-//             props.newsList.map(item => (
-//               <div key={item.id}>{item.title}</div>
-//             ))
-//           }
-//       </div>
-//   )
-// }
 
 class Home extends React.Component{
   constructor(props){
@@ -44,7 +25,6 @@ class Home extends React.Component{
   render(){
     return (
             <div onClick={() => {console.log('click Home')}}>
-              <Header />
               Hello, {this.props.name}
                {this.getHomeList()}
             </div>

@@ -1,22 +1,30 @@
+import App from './App';
 import Home from './containers/Home';
 import Login from './containers/Login';
 
 //路由改造
-export  default[
-    {
-      path: "/",
-      component: Home,
-      exact: true,
-      loadData: Home.loadData,
-      key: 'home'
-    },
-    {
-        path: "/login",
-        component: Login,
+export  default [
+  {
+    path: '/',
+    component: App,
+    key: 'app',
+    routes: [
+      {
+        path: "/",
+        component: Home,
         exact: true,
-        key: 'login'
-      }
-  ];
+        loadData: Home.loadData,
+        key: 'home'
+      },
+      {
+          path: "/login",
+          component: Login,
+          exact: true,
+          key: 'login'
+        }
+    ],
+  }
+];
 
 
 // export default(
