@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {CHANGE_LIST} from './contants';
+import clientAxios from '../../../client/request'
+import serverAxios from '../../../server/request'
 
 const changeList = (list) => ({
     type: CHANGE_LIST,
@@ -7,14 +9,9 @@ const changeList = (list) => ({
 })
 
 export const getHomeList = (server) => {
-    let url = '';
-    if(server){
-        url = 'http://localhost:4000/api/getNews'
-    }else{
-        url = '/api/getNews'
-    }
+    let  request = server ? serverAxios : clientAxios
     return (dispatch) => {
-        return axios.get(url).then(res => {
+        return request.get('/api/getNews').then(res => {
             const list = res.data.data;
             dispatch(changeList(list));
         })
