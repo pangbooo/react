@@ -8,6 +8,7 @@ export  default [
     path: '/',
     component: App,
     key: 'app',
+    loadData: App.loadData,
     routes: [
       {
         path: "/",
