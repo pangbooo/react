@@ -12,3 +12,19 @@ export const getHeaderInfo = () => {
         })
     }
 }
+
+export const login = () => {
+    return (dispatch, getState, axiosInstance) => {
+        return axiosInstance.get('/api/login').then(res => {
+            dispatch(changeLogin(res.data.data.login))
+        })
+    }
+}
+
+export const logout = () => {
+    return (dispatch, getState, axiosInstance) => {
+        return axiosInstance.get('/api/logout').then(res => {
+            dispatch(changeLogin(res.data.data.login))
+        })
+    }
+}

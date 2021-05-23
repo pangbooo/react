@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
+import {actions} from './store'
 
 const Header = (props) => {
   return (
@@ -10,8 +11,8 @@ const Header = (props) => {
         <br />
         {
           props.isLogin ?
-          <Link to='/logout'>退出</Link> :
-          <Link to='/login'>登陆</Link>
+          <div onClick={props.handleLogout}>退出</div> :
+          <div onClick={props.handleLogin}>登陆</div>
         }
       </div>
   )
@@ -21,4 +22,13 @@ const mapStateToProps = (state) => ({
   isLogin: state.header.isLogin
 })
 
-export default connect(mapStateToProps, null)(Header)
+const mapDispatchToProps = (dispatch) => ({
+  handleLogin: () => {
+    dispatch(actions.login())
+  },
+  handleLogout: () => {
+    dispatch(actions.logout())
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
