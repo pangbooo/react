@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-do
 import Home from './pages/Home';
 import Counter from './pages/Counter'
 import Ref from './pages/Ref'
+import FetchDataPageWithCustomHook from './pages/FetchDataPageWithCustomHook'
 import NoMatch from './pages/NoMatch';
 const list =[
   {
@@ -45,6 +46,7 @@ function AppRouter(){
                       <Route path='/' component={Home} exact></Route>
                       <Route path='/counter' component={Counter} exact></Route>
                       <Route path='/useRef' component={Ref} exact></Route>
+                      <Route path='/fetchDataPageWithCustomHook' component={FetchDataPageWithCustomHook} exact></Route>
                       {/* when none of the above match, <NoMatch> will be rendered */}
                       <Route component={NoMatch}></Route>
                   </Switch>
