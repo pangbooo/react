@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Counter from './pages/Counter'
 import Ref from './pages/Ref'
 import FetchDataPageWithCustomHook from './pages/FetchDataPageWithCustomHook'
+import SyntheticEvent from './pages/SyntheticEvent'
 import NoMatch from './pages/NoMatch';
 const list =[
   {
@@ -47,6 +48,7 @@ function AppRouter(){
                       <Route path='/counter' component={Counter} exact></Route>
                       <Route path='/useRef' component={Ref} exact></Route>
                       <Route path='/fetchDataPageWithCustomHook' component={FetchDataPageWithCustomHook} exact></Route>
+                      <Route path='/SyntheticEvent' component={SyntheticEvent} exact></Route>
                       {/* when none of the above match, <NoMatch> will be rendered */}
                       <Route component={NoMatch}></Route>
                   </Switch>
