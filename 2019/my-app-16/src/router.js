@@ -6,6 +6,7 @@ import Ref from './pages/Ref'
 import FetchDataPageWithCustomHook from './pages/FetchDataPageWithCustomHook'
 import SyntheticEvent from './pages/SyntheticEvent'
 import CaptureValue from './pages/CaptureValue'
+import Optimize from './pages/Optimize'
 import NoMatch from './pages/NoMatch';
 const list =[
   {
@@ -32,6 +33,9 @@ function Menu() {
         <li>
           <NavLink to="/CaptureValue" activeClassName="active" exact>Capture Value</NavLink>
         </li>
+        <li>
+          <NavLink to="/optimize" activeClassName="active" exact>re-render 优化</NavLink>
+        </li>
       </ul>
     );
 }
@@ -54,6 +58,7 @@ function AppRouter(){
                       <Route path='/fetchDataPageWithCustomHook' component={FetchDataPageWithCustomHook} exact></Route>
                       <Route path='/SyntheticEvent' component={SyntheticEvent} exact></Route>
                       <Route path='/CaptureValue' component={CaptureValue} exact></Route>
+                      <Route path='/optimize' component={Optimize} exact></Route>
                       {/* when none of the above match, <NoMatch> will be rendered */}
                       <Route component={NoMatch}></Route>
                   </Switch>
